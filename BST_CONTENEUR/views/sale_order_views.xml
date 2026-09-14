@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_container" model="ir.ui.view">
+        <field name="name">sale.order.form.container</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                 <button name="%(action_sale_order_container_wizard)d"
+                         type="action"
+                         string="Renseigner le conteneur"
+                          class="btn-secondary"
+                          context="{'active_id': id}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="container"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_tree_container" model="ir.ui.view">
+        <field name="name">sale.order.tree.container</field>
+         <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+               <xpath expr="//field[@name='partner_id']" position="after">
+                       <field name="container" optional="show"/>
+              </xpath>
+         </field>
+    </record>
+    <record id="view_order_kanban_container" model="ir.ui.view">
+        <field name="name">sale.order.kanban.container</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sale_order_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="inside">
+                 <field name="container"/>
+             </xpath>
+        </field>
+    </record>
+    <record id="view_sales_order_filter_container" model="ir.ui.view">
+        <field name="name">sale.order.search.container</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+         <field name="arch" type="xml">
+             <xpath expr="//field[@name='partner_id']" position="after">
+                 <field name="container" string="Conteneur"/>
+             </xpath>
+             <xpath expr="//filter[@name='customer']" position="after">
+                 <filter name="groupby_container" string="Conteneur"
+                    context="{'group_by': 'container'}"/>
+             </xpath>
+        </field>
+    </record>
+
+</odoo>
+

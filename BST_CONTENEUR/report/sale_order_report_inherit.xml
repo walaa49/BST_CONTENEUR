@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_saleorder_document_container"
+              inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@id='informations']" position="inside">
+            <div t-if="doc.container" class="col" name="informations_container">
+                <strong>Conteneur</strong>
+                <div t-field="doc.container">MSCU1234567</div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
