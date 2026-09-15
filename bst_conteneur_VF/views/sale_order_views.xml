@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- FORMULAIRE DEVIS / COMMANDE -->
+    <record id="view_order_form_container" model="ir.ui.view">
+        <field name="name">sale.order.form.container</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+
+        <field name="arch" type="xml">
+
+            <!-- Bouton Renseigner le conteneur -->
+            <xpath expr="//header" position="inside">
+                <button name="%(action_sale_order_container_wizard)d"
+                        type="action"
+                        string="Renseigner le conteneur"
+                        class="btn-secondary"
+                        context="{'active_id': id}"/>
+            </xpath>
+
+            <!-- Champ conteneur en lecture seule -->
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="container_id" readonly="1"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    
+
+
+    <!-- LISTE DES DEVIS / COMMANDES -->
+    <record id="view_order_tree_container_devis" model="ir.ui.view">
+        <field name="name">sale.order.tree.container</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="container_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+  <record id="view_order_tree_container" model="ir.ui.view">
+        <field name="name">sale.order.tree.container</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="container_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- KANBAN -->
+    <record id="view_order_kanban_container" model="ir.ui.view">
+        <field name="name">sale.order.kanban.container</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sale_order_kanban"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="inside">
+                <field name="container_id"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- RECHERCHE + GROUP BY -->
+    <record id="view_sales_order_filter_container" model="ir.ui.view">
+        <field name="name">sale.order.search.container</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id"
+               ref="sale.sale_order_view_search_inherit_quotation"/>
+
+        <field name="arch" type="xml">
+
+            <!-- Recherche par conteneur -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="container_id"
+                       string="Conteneur"/>
+            </xpath>
+
+            <!-- Group By conteneur -->
+            <xpath expr="//filter[@name='customer']" position="after">
+                <filter name="groupby_container"
+                        string="Conteneur"
+                        context="{'group_by': 'container_id'}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
