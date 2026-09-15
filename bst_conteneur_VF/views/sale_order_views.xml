@@ -30,18 +30,19 @@
 
 
     <!-- LISTE DES DEVIS / COMMANDES -->
-    <record id="view_order_tree_container_devis" model="ir.ui.view">
-        <field name="name">sale.order.tree.container</field>
+    <record id="view_order_tree_container_1" model="ir.ui.view">
+        <field name="name">sale.order.quotation.tree.container</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
 
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="container_id" optional="show"/>
+                <field name="container_id" string="Conteneur" optional="show"/>
             </xpath>
         </field>
     </record>
-  <record id="view_order_tree_container" model="ir.ui.view">
+
+    <record id="view_order_tree_container" model="ir.ui.view">
         <field name="name">sale.order.tree.container</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_tree"/>
@@ -53,17 +54,18 @@
         </field>
     </record>
 
+
+
     <!-- KANBAN -->
     <record id="view_order_kanban_container" model="ir.ui.view">
         <field name="name">sale.order.kanban.container</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_sale_order_kanban"/>
-
         <field name="arch" type="xml">
-            <xpath expr="//kanban" position="inside">
+            <xpath expr="//field[@name='date_order']" position="after">
                 <field name="container_id"/>
             </xpath>
-        </field>
+         </field>
     </record>
 
 
@@ -90,6 +92,6 @@
             </xpath>
 
         </field>
+    
     </record>
-
 </odoo>
